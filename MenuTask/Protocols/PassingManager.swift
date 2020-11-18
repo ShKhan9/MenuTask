@@ -7,6 +7,8 @@
 //
 
 import Foundation
-protocol PassingProtocol:class {
+
+// used to show the product popup
+protocol PassingManager:class {
     func selected(_ product:ProductModel)
 }

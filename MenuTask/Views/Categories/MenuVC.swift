@@ -1,5 +1,5 @@
 //
-//  ProductVC.swift
+//  MenuVC.swift
 //  MenuTask
 //
 //  Created by Shehata Gamal on 11/18/20.
@@ -8,112 +8,91 @@
 
 import UIKit
 import RealmSwift
-import SDWebImage
-import Lottie
+class MenuVC: MainViewControllerS {
 
-class ProductVC: MainViewControllerS {
- 
-    // IB Outlets
-    @IBOutlet weak var productsCV: UICollectionView!
+    // outlet for the main collectionView
+    @IBOutlet weak var categoriesCV: UICollectionView!
     
-    @IBOutlet weak var backBu: UIButton!
+    // get all categroies from server
+    var categroies = MenuViewModel()
     
-    @IBOutlet weak var namelb: UILabel!
-    
-    // send data from ProductVC to menuVC
-    weak var delegate:PassingManager?
-    
-    // get products for a category from server
-    var products = ProductViewModel()
-     
-    // passed category from the previous vc
-    var selectedCate:Category!
-     
-    // dataSource of collection = all products
-    var res:RootProduct?
+    // hold root json for categories
+    var res:RootCategory?
     
     // current page categories
-    var currentPage = [ProductModel]()
+    var currentPage = [Category]()
     
     // hold all categories
-    var allPages = [[ProductModel]]()
+    
+    var allPages = [[Category]]()
     
     // prev - next moving needle
     var needle = 0
-      
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        // configure collectionView dataSource & delegate + register
    
-        self.backBu.setTitle(String(format:"%C",0xf053), for: .normal)
-        
-        namelb.text = selectedCate?.name
-        
-       productsCV.delegate = self
+       categoriesCV.delegate = self
        
-       productsCV.dataSource = self
+       categoriesCV.dataSource = self
        
-       productsCV.register(UINib(nibName: "ProductCollectionCell", bundle: nil), forCellWithReuseIdentifier: "cell")
- 
+       categoriesCV.register(UINib(nibName: "CateCollectionCell", bundle: nil), forCellWithReuseIdentifier: "cell")
+     
        readStored()
-        
+       
     }
     
-    // check if we requested products of that category before
+    // retrieve stored object if exists
     
     func readStored() {
+        
+         let realm = try! Realm()
+        
+         let value = realm.objects(RootCategory.self)
          
-        if let res = selectedCate.content {
+        if value.isEmpty {
             
-            self.success(res)
+           getCategories()
         }
         else {
-
-            getProducts()
             
+            self.success(value.first!)
         }
          
+        
     }
     
-    // get products
+    // get categories
     
-    func getProducts() {
+    func getCategories() {
         
-         
         if Utilities.noNetwork() {
             
             noInternet()
         }
         else {
-             
-            products.start(self,name:selectedCate!.id, params: [:])
+            
+            categroies.start(self, params: [:])
             
         }
         
-        
     }
-
-    // success part of getting products
     
-    func success(_ res:RootProduct) {
-        
-        print(res)
+    // success part of getting data
+
+    func success(_ res:RootCategory) {
         
         self.res = res
         
         allPages = self.res?.data.chunked(into: 20) ?? []
-         
+        
         currentPage = allPages.first ?? []
         
-        let realm = try! Realm()
+        self.categoriesCV.reloadData()
         
-        try! realm.write {
-            
-               selectedCate?.content = res
-        }
-        
-        self.productsCV.reloadData()
-         
     }
     
      // fail part of getting data
@@ -123,7 +102,7 @@ class ProductVC: MainViewControllerS {
         let alert = UIAlertController(title: "Error Message", message: "Problem downloading data", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         alert.addAction(UIAlertAction(title: "ReTry", style: .default, handler: { (act) in
-            self.getProducts()
+            self.getCategories()
         }))
         self.present(alert, animated: true, completion: nil)
          
@@ -136,7 +115,7 @@ class ProductVC: MainViewControllerS {
         let alert = UIAlertController(title:nil , message: "No internet connection", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         alert.addAction(UIAlertAction(title: "ReTry", style: .default, handler: { (act) in
-            self.getProducts()
+           self.getCategories()
         }))
         self.present(alert, animated: true, completion: nil)
          
@@ -152,7 +131,7 @@ class ProductVC: MainViewControllerS {
             
             currentPage = allPages[needle]
             
-            productsCV.reloadData()
+            categoriesCV.reloadData()
             
         }
          
@@ -168,30 +147,18 @@ class ProductVC: MainViewControllerS {
             
             currentPage = allPages[needle]
             
-            productsCV.reloadData()
+            categoriesCV.reloadData()
             
         }
 
     }
-    
-    // Action when back button is clicked to pop the vc
-    
-    @IBAction func backClicked(_ sender: Any) {
-
-        self.navigationController?.popViewController(animated: true)
-         
-    }
-    
-    
-    
-    
-
 }
+
 
 
 // implement dataSource & delegate of the collection
 
-extension ProductVC :  UICollectionViewDelegate  , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
+extension MenuVC :  UICollectionViewDelegate  , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
          
@@ -203,31 +170,75 @@ extension ProductVC :  UICollectionViewDelegate  , UICollectionViewDataSource , 
          
         let wid = (self.view.frame.width  - 40 ) / 3
         
-        print(wid)
+     //   print(wid)
         
-        return CGSize(width:wid, height: wid)
+        return CGSize(width:wid, height:100)
        
         
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
          
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ProductCollectionCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CateCollectionCell
           
              let item = currentPage[indexPath.row]
         
-            cell.nameLbl.text = item.name
+             cell.nameLbl.text = item.name
         
-            cell.img.sd_setImage(with: URL(string:item.image ?? "" ), placeholderImage: UIImage(named: "placeholder.png"))
-              
-            return cell
+             return cell
             
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-          
-        delegate?.selected(currentPage[indexPath.row])
-    }
+        
+        let vc = self.storyboard!.instantiateViewController(identifier: "ProductVC") as! ProductVC
+        
+        vc.delegate = self
+        
+        vc.selectedCate = currentPage[indexPath.row]
+        
+        self.navigationController?.pushViewController(vc, animated:true)
+        
+    } 
 
 }
 
+// implement proptocol for communication between MenuVC and ProductVC
+
+extension MenuVC:PassingManager {
+    
+    func selected(_ product:ProductModel) {
+         
+        self.navigationController?.popToRootViewController(animated: false)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            
+            let vc = self.storyboard!.instantiateViewController(identifier: "ProductDetailsVC") as! ProductDetailsVC
+            
+            vc.modalPresentationStyle = .overCurrentContext
+            
+            vc.product = product
+            
+            self.present(vc, animated: true, completion: nil)
+            
+        }
+         
+    }
+    
+}
+
+// facilitate chunking the pages
+ 
+extension List {
+    
+    func chunked(into size: Int) -> [[Element]] {
+        
+        return stride(from: 0, to: count, by: size).map {
+            
+            Array(self[$0 ..< Swift.min($0 + size, count)])
+            
+        }
+        
+    }
+    
+}

@@ -9,19 +9,13 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
-import SWRevealViewController
+ 
 
 class MainViewControllerS: UIViewController {
  
     override func viewDidLoad() {
         super.viewDidLoad()
-      
-    
-        setNeedsStatusBarAppearanceUpdate()
-        if (self.revealViewController()) != nil
-        {
-            self.view.addGestureRecognizer(self.revealViewController().tapGestureRecognizer())
-        }
+       
     }
     
     func success(data:JSON){
@@ -31,27 +25,9 @@ class MainViewControllerS: UIViewController {
     func fail(error:JSON){
         
     }
-    
-    func redirect(data:JSON){
-        
-    }
-    
-    func sendCurrentProgree(_ val:CGFloat){
-        
-        
-    }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        
-        return UIStatusBarStyle.default
-    }
   
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    func AddTopIcons(){
-        
-    }
-    
+    } 
 }

@@ -16,26 +16,21 @@
                 <rect key="frame" x="0.0" y="0.0" width="249" height="150"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LcI-ZY-fTE">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LcI-ZY-fTE">
                         <rect key="frame" x="0.0" y="0.0" width="249" height="150"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
             </view>
-            <constraints>
-                <constraint firstItem="LcI-ZY-fTE" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="BtC-nV-zA8"/>
-                <constraint firstItem="LcI-ZY-fTE" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Ip2-dl-eBS"/>
-                <constraint firstAttribute="bottom" secondItem="LcI-ZY-fTE" secondAttribute="bottom" id="SAa-4d-0jj"/>
-                <constraint firstAttribute="trailing" secondItem="LcI-ZY-fTE" secondAttribute="trailing" id="unN-8R-Oo8"/>
-            </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="249" height="150"/>
             <connections>
                 <outlet property="nameLbl" destination="LcI-ZY-fTE" id="bgP-Rn-Qnz"/>
             </connections>
-            <point key="canvasLocation" x="281.8840579710145" y="165.40178571428569"/>
+            <point key="canvasLocation" x="92" y="88"/>
         </collectionViewCell>
     </objects>
 </document>
