@@ -218,12 +218,12 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		524267D625656C700058B7C6 /* VC Extensions' */ = {
+		524267D625656C700058B7C6 /* VC Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				524267D725656C840058B7C6 /* Loading.swift */,
 			);
-			path = "VC Extensions'";
+			path = "VC Extensions";
 			sourceTree = "<group>";
 		};
 		524267DB25656F4E0058B7C6 /* Lottie Json */ = {
@@ -271,7 +271,7 @@
 				52F68FF82564A24600FBEC85 /* SceneDelegate.swift */,
 				524267DE25658AC40058B7C6 /* Protocols */,
 				524267DB25656F4E0058B7C6 /* Lottie Json */,
-				524267D625656C700058B7C6 /* VC Extensions' */,
+				524267D625656C700058B7C6 /* VC Extensions */,
 				5241F63125655AF70003F5E2 /* Fonts */,
 				5241F61F25653C160003F5E2 /* Views */,
 				52F68FFC2564A24600FBEC85 /* Main.storyboard */,
