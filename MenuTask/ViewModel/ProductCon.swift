@@ -48,6 +48,8 @@ class ProductViewModel: MainControllerS {
           print("Error dfjkjdfjkfdjkfdkj", data)
         
           guard let vc = con as? MenuVC else { return }
+        
+          vc.fail()
          
     }
     
