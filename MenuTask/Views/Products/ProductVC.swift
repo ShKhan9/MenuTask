@@ -22,9 +22,6 @@ class ProductVC: MainViewControllerS {
     
     // send data from ProductVC to menuVC
     weak var delegate:PassingManager?
-    
-    // get products for a category from server
-    var products = ProductViewModel()
      
     // passed category from the previous vc
     var selectedCate:Category!
@@ -54,92 +51,21 @@ class ProductVC: MainViewControllerS {
        productsCV.dataSource = self
        
        productsCV.register(UINib(nibName: "ProductCollectionCell", bundle: nil), forCellWithReuseIdentifier: "cell")
- 
-       readStored()
+  
+       setData(selectedCate!)
         
     }
     
-    // check if we requested products of that category before
-    
-    func readStored() {
-         
-        if let res = selectedCate.content {
-            
-            self.success(res)
-        }
-        else {
-
-            getProducts()
-            
-        }
-         
-    }
-    
-    // get products
-    
-    func getProducts() {
-        
-         
-        if Utilities.noNetwork() {
-            
-            noInternet()
-        }
-        else {
-             
-            products.start(self,name:selectedCate!.id, params: [:])
-            
-        }
-        
-        
-    }
-
-    // success part of getting products
-    
-    func success(_ res:RootProduct) {
+    func setData(_ res:Category) {
         
         print(res)
-        
-        self.res = res
-        
-        allPages = self.res?.data.chunked(into: 20) ?? []
+          
+        allPages = res.content.chunked(into: 20)
          
         currentPage = allPages.first ?? []
         
-        let realm = try! Realm()
-        
-        try! realm.write {
-            
-               selectedCate?.content = res
-        }
-        
         self.productsCV.reloadData()
-         
-    }
-    
-     // fail part of getting data
-    
-    func fail() {
         
-        let alert = UIAlertController(title: "Error Message", message: "Problem downloading data", preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        alert.addAction(UIAlertAction(title: "ReTry", style: .default, handler: { (act) in
-            self.getProducts()
-        }))
-        self.present(alert, animated: true, completion: nil)
-         
-    }
-    
-     // No internet connection
-    
-    func noInternet() {
-        
-        let alert = UIAlertController(title:nil , message: "No internet connection", preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        alert.addAction(UIAlertAction(title: "ReTry", style: .default, handler: { (act) in
-            self.getProducts()
-        }))
-        self.present(alert, animated: true, completion: nil)
-         
     }
     
     // previous button click

@@ -8,54 +8,112 @@
  
 import SwiftyJSON
 import RealmSwift
-class MenuViewModel: MainControllerS {
+class MenuViewModel {
  
     weak var con: MainViewControllerS!
    
+    let dispatchG = DispatchGroup()
+    
+    var dataCateg:Data?
+    
+    var dataProduct:Data?
+     
     func start(_ controller:MainViewControllerS,params:[String:Any]) {
         
         con = controller
-        
-        super.Get(controller:controller, url:Links.categories, parameters1: params, headers1: [:])
-        
-        
-    }
+       
+        let realm = try! Realm()
     
-    
-    override func success(data: JSON) {
-        
-        guard let vc = con as? MenuVC else { return }
-      
-            do {
+        let value = realm.objects(RootCategory.self)
+         
+        if value.isEmpty {
+             
+            self.dispatchG.enter()
+            
+            MainControllerS.Get(controller:controller, url:Links.categories, parameters1: params, headers1: [:]) { data in
                 
-                let itemData = try data.rawData()
-
-                let res = try JSONDecoder().decode(RootCategory.self, from: itemData)
-
-                let realm = try! Realm()
+                self.dataCateg = data
                 
-                try! realm.write {
+                self.dispatchG.leave()
+                
+                
+            }
+            
+            self.dispatchG.enter()
+            
+            MainControllerS.Get(controller:controller, url:Links.products, parameters1: params, headers1: [:]) { data in
+                
+                self.dataProduct = data
+                
+                self.dispatchG.leave()
+                
+            }
+             
+            self.dispatchG.notify(queue: .main) {
+                
+                if let cate = self.dataCateg , let prod = self.dataProduct {
+                   
+                    do {
+                        
+                        let resCate = try JSONDecoder().decode(RootCategory.self, from: cate)
+
+                        let resProd = try JSONDecoder().decode(RootProduct.self, from: prod)
+                        
+                      //  print(resCate)
+                        
+                      //  print(resProd)
+                        
+                        resCate.data.forEach { (item:Category) in
+                            
+                            let res = resProd.data.filter { $0.id == item.id }
+                            
+                            let myList = List<ProductModel>()
+                            
+                            res.forEach { it in
+                             
+                                myList.append(it)
+                            }
+                            
+                            print("hjdshhdhdshsdhjdhs ",myList.count)
+                            
+                            item.content = myList
+                            
+                        }
+//
+//                        let realm = try! Realm()
+//
+//                        try! realm.write {
+//
+//                            realm.add(resCate)
+//
+//                        }
+                        
+                        (self.con as! MenuVC).sendData(resCate)
+                         
+                    }
+                    catch {
+                        
+                        
+                        print(error)
+                    }
                     
-                    realm.add(res)
+                }
+                else {
+                    
+                    
                     
                 }
                 
-                vc.success(res)
+            }
+            
+        }
+        else {
+            
+            (con as! MenuVC).sendData(value.first!)
+        }
+              
+    }
  
-            }
-            catch {
-                
-                print("EEEEEEE in decoding",error)
-            }
-    }
-    
-    override func fail(data: JSON) {
-         
-          guard let vc = con as? MenuVC else { return }
-         
-          vc.fail()
-    }
-    
 }
     
 

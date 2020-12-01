@@ -10,20 +10,27 @@ import Foundation
 import RealmSwift
 
 @objcMembers public class RootCategory: Object, Codable {
-    dynamic var data = List<Category>()
-    dynamic var links:NavLinks?
+    dynamic var data = List<Category>() 
 }
-
+ 
 @objcMembers public class Category: Object, Codable {
-    dynamic var id: String = ""
-    dynamic var name: String = ""
-    dynamic var content:RootProduct?
-}
+    
+     dynamic var id: String = ""
+     dynamic var name: String = ""
+     dynamic var content = List<ProductModel>()
 
-
-@objcMembers public class NavLinks: Object, Codable {
-    dynamic var first: String? = ""
-    dynamic var last: String? = ""
-    dynamic var next: String? = ""
-    dynamic var prev: String? = ""
+  public convenience required init(from decoder: Decoder) throws {
+    self.init()
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    self.id = try container.decode(String.self, forKey: .id)
+    self.name = try container.decode(String.self, forKey: .name)
+    if let workingArray = try container.decodeIfPresent(Array<ProductModel>.self, forKey: .content)
+    {
+        content.append(objectsIn: workingArray)
+    }
+    else {
+        
+        
+    }
+  }
 }

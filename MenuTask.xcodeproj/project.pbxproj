@@ -18,9 +18,7 @@
 		5241F605256534580003F5E2 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5241F604256534580003F5E2 /* Category.swift */; };
 		5241F61D25653A040003F5E2 /* CateCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5241F61B25653A040003F5E2 /* CateCollectionCell.swift */; };
 		5241F61E25653A040003F5E2 /* CateCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5241F61C25653A040003F5E2 /* CateCollectionCell.xib */; };
-		5241F623256545660003F5E2 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5241F622256545660003F5E2 /* Product.swift */; };
 		5241F625256545950003F5E2 /* ProductVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5241F624256545950003F5E2 /* ProductVC.swift */; };
-		5241F6272565460E0003F5E2 /* ProductCon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5241F6262565460E0003F5E2 /* ProductCon.swift */; };
 		5241F62A256546480003F5E2 /* ProductCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5241F628256546480003F5E2 /* ProductCollectionCell.swift */; };
 		5241F62B256546480003F5E2 /* ProductCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5241F629256546480003F5E2 /* ProductCollectionCell.xib */; };
 		5241F62D256547510003F5E2 /* PassingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5241F62C256547510003F5E2 /* PassingManager.swift */; };
@@ -28,6 +26,7 @@
 		5241F64225655D7C0003F5E2 /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5241F64125655B0D0003F5E2 /* fontawesome-webfont.ttf */; };
 		524267D825656C840058B7C6 /* Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524267D725656C840058B7C6 /* Loading.swift */; };
 		524267DD25656F5F0058B7C6 /* Loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 524267DC25656F5F0058B7C6 /* Loading.json */; };
+		527B5E4E25764E580061B42A /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527B5E4D25764E580061B42A /* Product.swift */; };
 		52F68FF72564A24600FBEC85 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F68FF62564A24600FBEC85 /* AppDelegate.swift */; };
 		52F68FF92564A24600FBEC85 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F68FF82564A24600FBEC85 /* SceneDelegate.swift */; };
 		52F68FFB2564A24600FBEC85 /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F68FFA2564A24600FBEC85 /* MenuVC.swift */; };
@@ -68,9 +67,7 @@
 		5241F604256534580003F5E2 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		5241F61B25653A040003F5E2 /* CateCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CateCollectionCell.swift; sourceTree = "<group>"; };
 		5241F61C25653A040003F5E2 /* CateCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CateCollectionCell.xib; sourceTree = "<group>"; };
-		5241F622256545660003F5E2 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		5241F624256545950003F5E2 /* ProductVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductVC.swift; sourceTree = "<group>"; };
-		5241F6262565460E0003F5E2 /* ProductCon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCon.swift; sourceTree = "<group>"; };
 		5241F628256546480003F5E2 /* ProductCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCollectionCell.swift; sourceTree = "<group>"; };
 		5241F629256546480003F5E2 /* ProductCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductCollectionCell.xib; sourceTree = "<group>"; };
 		5241F62C256547510003F5E2 /* PassingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassingManager.swift; sourceTree = "<group>"; };
@@ -78,6 +75,7 @@
 		5241F64125655B0D0003F5E2 /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
 		524267D725656C840058B7C6 /* Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loading.swift; sourceTree = "<group>"; };
 		524267DC25656F5F0058B7C6 /* Loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Loading.json; sourceTree = "<group>"; };
+		527B5E4D25764E580061B42A /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		52F68FF32564A24600FBEC85 /* MenuTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MenuTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52F68FF62564A24600FBEC85 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		52F68FF82564A24600FBEC85 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -158,7 +156,6 @@
 			isa = PBXGroup;
 			children = (
 				5241F601256530CF0003F5E2 /* MenuCon.swift */,
-				5241F6262565460E0003F5E2 /* ProductCon.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -167,7 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				5241F604256534580003F5E2 /* Category.swift */,
-				5241F622256545660003F5E2 /* Product.swift */,
+				527B5E4D25764E580061B42A /* Product.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -561,9 +558,9 @@
 				524267D825656C840058B7C6 /* Loading.swift in Sources */,
 				5241F5FF25652F040003F5E2 /* LoadingMini.swift in Sources */,
 				5241F62A256546480003F5E2 /* ProductCollectionCell.swift in Sources */,
+				527B5E4E25764E580061B42A /* Product.swift in Sources */,
 				52F68FF72564A24600FBEC85 /* AppDelegate.swift in Sources */,
 				5241F5FC25652DD20003F5E2 /* Utilities.swift in Sources */,
-				5241F6272565460E0003F5E2 /* ProductCon.swift in Sources */,
 				5241F62D256547510003F5E2 /* PassingManager.swift in Sources */,
 				5241F5FD25652DD20003F5E2 /* MainViewControllerS.swift in Sources */,
 				5241F602256530CF0003F5E2 /* MenuCon.swift in Sources */,
@@ -573,7 +570,6 @@
 				5241F5F625652CF10003F5E2 /* MainControllerS.swift in Sources */,
 				52F68FF92564A24600FBEC85 /* SceneDelegate.swift in Sources */,
 				5241F5F925652DA30003F5E2 /* Constants.swift in Sources */,
-				5241F623256545660003F5E2 /* Product.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

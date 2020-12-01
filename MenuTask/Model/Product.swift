@@ -10,7 +10,6 @@ import Foundation
 import RealmSwift
 @objcMembers public class RootProduct: Object, Codable {
     dynamic var data = List<ProductModel>()
-    dynamic var links:NavLinks?
 }
 
 @objcMembers public class ProductModel: Object, Codable {

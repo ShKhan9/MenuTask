@@ -14,7 +14,7 @@ class MenuVC: MainViewControllerS {
     @IBOutlet weak var categoriesCV: UICollectionView!
     
     // get all categroies from server
-    var categroies = MenuViewModel()
+    var getAll = MenuViewModel()
     
     // hold root json for categories
     var res:RootCategory?
@@ -28,6 +28,9 @@ class MenuVC: MainViewControllerS {
     
     // prev - next moving needle
     var needle = 0
+     
+    
+    let dispatchG = DispatchGroup()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,34 +43,14 @@ class MenuVC: MainViewControllerS {
        categoriesCV.dataSource = self
        
        categoriesCV.register(UINib(nibName: "CateCollectionCell", bundle: nil), forCellWithReuseIdentifier: "cell")
-     
-       readStored()
+    
+        getAllData()
        
     }
-    
-    // retrieve stored object if exists
-    
-    func readStored() {
-        
-         let realm = try! Realm()
-        
-         let value = realm.objects(RootCategory.self)
-         
-        if value.isEmpty {
-            
-           getCategories()
-        }
-        else {
-            
-            self.success(value.first!)
-        }
-         
-        
-    }
-    
+   
     // get categories
     
-    func getCategories() {
+    func getAllData() {
         
         if Utilities.noNetwork() {
             
@@ -75,15 +58,15 @@ class MenuVC: MainViewControllerS {
         }
         else {
             
-            categroies.start(self, params: [:])
-            
+            self.getAll.start(self, params: [:])
+          
         }
         
     }
     
     // success part of getting data
 
-    func success(_ res:RootCategory) {
+    func sendData(_ res:RootCategory) {
         
         self.res = res
         
@@ -102,7 +85,7 @@ class MenuVC: MainViewControllerS {
         let alert = UIAlertController(title: "Error Message", message: "Problem downloading data", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         alert.addAction(UIAlertAction(title: "ReTry", style: .default, handler: { (act) in
-            self.getCategories()
+            self.getAllData()
         }))
         self.present(alert, animated: true, completion: nil)
          
@@ -115,7 +98,7 @@ class MenuVC: MainViewControllerS {
         let alert = UIAlertController(title:nil , message: "No internet connection", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         alert.addAction(UIAlertAction(title: "ReTry", style: .default, handler: { (act) in
-           self.getCategories()
+           self.getAllData()
         }))
         self.present(alert, animated: true, completion: nil)
          
