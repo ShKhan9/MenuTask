@@ -9,7 +9,7 @@ import Foundation
  
 var mainPath = "https://api.foodics.dev/v5/"
 var cate = "categories"
-var pro = "products"
+var pro = "products?include=category"
 struct Links  {
     static var categories = "\(mainPath)\(cate)"
     static var products = "\(mainPath)\(pro)" 

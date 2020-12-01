@@ -17,4 +17,5 @@ import RealmSwift
     dynamic var name: String = ""
     dynamic var image: String? = ""
     dynamic var price: Int = 0
+    dynamic var category:Category?
 }

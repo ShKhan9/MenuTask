@@ -58,14 +58,10 @@ class MenuViewModel {
                         let resCate = try JSONDecoder().decode(RootCategory.self, from: cate)
 
                         let resProd = try JSONDecoder().decode(RootProduct.self, from: prod)
-                        
-                      //  print(resCate)
-                        
-                      //  print(resProd)
-                        
+ 
                         resCate.data.forEach { (item:Category) in
                             
-                            let res = resProd.data.filter { $0.id == item.id }
+                            let res = resProd.data.filter { $0.category!.id == item.id }
                             
                             let myList = List<ProductModel>()
                             
@@ -79,28 +75,30 @@ class MenuViewModel {
                             item.content = myList
                             
                         }
-//
-//                        let realm = try! Realm()
-//
-//                        try! realm.write {
-//
-//                            realm.add(resCate)
-//
-//                        }
+
+                        let realm = try! Realm()
+
+                        try! realm.write {
+
+                            realm.add(resCate)
+
+                        }
                         
                         (self.con as! MenuVC).sendData(resCate)
                          
                     }
                     catch {
-                        
-                        
+                         
                         print(error)
+                        
+                        (self.con as! MenuVC).fail()
+                        
                     }
                     
                 }
                 else {
                     
-                    
+                    (self.con as! MenuVC).fail()
                     
                 }
                 
