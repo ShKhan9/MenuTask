@@ -75,9 +75,7 @@ class MenuViewModel {
                             item.content = myList
                             
                         }
-
-                        let realm = try! Realm()
-
+                        
                         try! realm.write {
 
                             realm.add(resCate)
